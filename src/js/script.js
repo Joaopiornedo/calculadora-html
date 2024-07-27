@@ -3,7 +3,7 @@ function aplicarEstilos(backgroundImage, iconS, iconL, btsBackground, resultColo
     document.getElementById("icone-s").src = iconS;
     document.getElementById("icone-l").src = iconL;
     document.getElementById("btns").style.background = btsBackground;
-    document.getElementById("resultado").style.color = resultColor;
+    document.getElementById("result").style.color = resultColor;
     document.getElementById("visor").style.background = telaBackground;
     
 }
@@ -30,4 +30,42 @@ function escuro() {
         "none",
         ""
     );
+}
+
+var r = document.getElementById("result")
+function clickNumber(num) {
+    if (result.innerText === "0") {
+        result.innerText = num;
+    } else {
+        result.innerText += num;
+    }
+}
+function clickOperator(op) {
+    result.innerText += " " + op + " ";
+}
+
+function apagar() {
+    result.innerText = "0";
+}
+
+
+function total() {
+    try {
+        result.innerText = eval(result.innerText.replace(/ /g, ""));
+    } catch (e) {
+        result.innerText = "Error";
+    }
+}
+function pos_neg() {
+    let displayValue = result.innerText.trim();
+    if (displayValue !== "0" && displayValue !== "") {
+        let parts = displayValue.split(" ");
+        let lastPart = parts[parts.length - 1];
+        if (!isNaN(lastPart)) {
+            lastPart = parseFloat(lastPart);
+            lastPart = -lastPart;
+            parts[parts.length - 1] = lastPart;
+            result.innerText = parts.join(" ");
+        }
+    }
 }
